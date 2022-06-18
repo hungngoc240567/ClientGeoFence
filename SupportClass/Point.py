@@ -1,3 +1,6 @@
+from re import S
+
+
 class Point:
     def __init__(self, x, y):
         self.x = x
@@ -20,3 +23,6 @@ class Point:
     
     def toString(self):
         return str(self.getX()) + " " + str(self.getY())
+
+    def toJson(self):
+        return {"x": self.x, "y": self.y}

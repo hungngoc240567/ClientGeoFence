@@ -11,14 +11,13 @@ import random
 from threading import Thread
 
 class Vehicle(Thread):
-    def __init__(self):
+    def __init__(self, id =None, pos=Point(0, 0), listIdGeoFenceIn = [],vx = 0, vy = 0):
         super(Vehicle, self) .__init__()
-        self.id = None
-        self.curPoint = self.generateInitRandomPosition()
-        # send lên server thông tin khởi tạo và server sẽ
-        # trả về id của phương tiện
-        self.id = vehicleController.sendInitVehicle(self)
-        self.listIdGeoGence = []
+        self.id = id
+        self.curPoint = pos
+        self.vx = vx
+        self.vy = vy
+        self.listIdGeoGence = listIdGeoFenceIn
 
     def getPoint(self):
         return self.curPoint
@@ -46,15 +45,19 @@ class Vehicle(Thread):
     def generateNextPoint(self, time):
         point = self.getPoint()
         newPoint = Point(0, 0)
-        randX = random.uniform(0, vehicleConfig.getMaxRangeRandom()) - vehicleConfig.getMinRangeRandom()
-        randY = random.uniform(0, vehicleConfig.getMaxRangeRandom()) - vehicleConfig.getMinRangeRandom()
+        randX = self.vx
+        if random.uniform(0, 1) >= 0.5:
+            randX *= -1
+        randY = self.vy
+        if random.uniform(0, 1) >= 0.5:
+            randY*=-1
         newPoint.x = point.x + randX * time
         newPoint.y = point.y + randY * time
         return newPoint
 
     def generateInitRandomPosition(self):
-        randX = random.uniform(0, vehicleConfig.getMaxInitPosition()) - vehicleConfig.getMinInitPosition()
-        randY = random.uniform(0, vehicleConfig.getMaxInitPosition()) - vehicleConfig.getMinInitPosition()
+        randX = random.uniform(0, vehicleConfig.getMaxInitPosition()) + vehicleConfig.getMinInitPosition()
+        randY = random.uniform(0, vehicleConfig.getMaxInitPosition()) + vehicleConfig.getMinInitPosition()
         return Point(randX, randY)
 
     def onDrawOnScreen(self):

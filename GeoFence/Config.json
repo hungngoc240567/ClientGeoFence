@@ -1,7 +1,20 @@
 {
     "router_path": "http://localhost:8080/api/v1/geoFence",
+
     "max_geo_fence": 200,
     "max_point_in_geo_fence": 100,
-    "max_range_random_init": 100,
-    "min_range_random_init": 50
+    "max_range_random_init": 800,
+    "min_range_random_init": 200,
+
+    "min_range_init_X": 0,
+    "max_range_init_X": 1200,
+
+    "min_range_init_Y": 50,
+    "max_range_init_Y": 800,
+
+    "min_len_range_init_X": 200,
+    "max_len_range_init_X": 800,
+
+    "min_len_range_init_Y": 200,
+    "max_len_range_init_Y": 800
 }

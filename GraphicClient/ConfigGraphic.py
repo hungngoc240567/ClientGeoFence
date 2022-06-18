@@ -1,0 +1,9 @@
+from pickle import GLOBAL
+
+
+SIZE_WIDTH = 1600
+SIZE_HEIGHT = 1200
+GLOBAL_GRAPHIC_VARIABLE = {
+    'GEO_FENCE_MAP_VIEW': None,
+    'GEO_FENCE_TOUCH_DRAW': None,
+}

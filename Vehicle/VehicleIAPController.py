@@ -9,10 +9,8 @@ class VehicleAIPController:
         self.router = vehicleConfig.getRouterPath()
         self.routerUpdatePosition = vehicleConfig.getUpdatePositionRouter()
     
-    def sendInitVehicle(self, vehicle):
-        json = {"type": "", "point" : {"x": 0, "y": 0}}
-        json["point"]["x"] = vehicle.getPoint().getX()
-        json["point"]["y"] = vehicle.getPoint().getY()
+    def sendInitVehicle(self, pos, vx, vy):
+        json = {"type": "", "point" : {"x": pos.getX(), "y": pos.getY()}, "vx": vx, "vy": vy}
         response = requests.post(self.router, json = json)
         return response.json()
 
@@ -21,4 +19,7 @@ class VehicleAIPController:
         response = requests.put(self.routerUpdatePosition, json = jsonBody)
         return response.json()
         
+    def sendGetListVehicle(self):
+        response = requests.get(self.router)
+        return response.json()
 vehicleController = VehicleAIPController()
