@@ -5,14 +5,14 @@ from GraphicClient.AppClient import *
 
 def __main__():
     # khởi tạo list geofence
-    geoFenceMgr = GeoFenceManager()
+    # geoFenceMgr = GeoFenceManager()
 
-    # Khởi tạo list phương tiện
-    vehicleMgr = VehicleManager()
+    # # Khởi tạo list phương tiện
+    # vehicleMgr = VehicleManager()
     
-    # Khởi tạo phần đồ hoạ client
+    # # Khởi tạo phần đồ hoạ client
     geoFenceClientApp = AppGeoFenceClient()
-    geoFenceClientApp.setInfoMgr(geoFenceMgr, vehicleMgr)
+    geoFenceClientApp.setInfoMgr(None, None)
     geoFenceClientApp.run()
 
 __main__()

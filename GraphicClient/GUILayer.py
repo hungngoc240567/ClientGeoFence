@@ -6,8 +6,10 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy_garden.mapview import MapMarkerPopup
 from GraphicClient.ConfigGraphic import *
+from GraphicClient.GeoFenceLabel import *
 from GraphicClient.GeoFenceButton import *
 from functools import partial
+from kivy.core.window import Window
         
 
 class GUILayer(FloatLayout):
@@ -15,6 +17,11 @@ class GUILayer(FloatLayout):
     def __init__(self, **kwargs):
         super(GUILayer, self).__init__(**kwargs)
         self.init()
+
+    def createLabel(self, pos):
+        label = GeoFenceLabel(text = "Number geo fence", size_hint = (0.3, 0.08), pos = pos)
+        self.add_widget(label)
+        return label
 
     # hàm khi user bấm vào nút chấp nhận sửa hàng rào
     def onUserAcceptedUpdate(self):
@@ -110,8 +117,20 @@ class GUILayer(FloatLayout):
                     c.update_child_position()
             except:
                 print('update_child_position fail')
+    
+    def setNumberGeoFence(self, numberGeoFence):
+        self.labelGeoFence.text = "Number geo fence: " + str(numberGeoFence)
+    
+    def setNumberVehicle(self, numberVehicle):
+        self.labelVehicle.text = "Number vehicle: " + str(numberVehicle)
 
     def init(self):
+        geoFenceMgr = GLOBAL_GRAPHIC_VARIABLE['GEO_FENCE_MANAGER']
+        vehicleMgr = GLOBAL_GRAPHIC_VARIABLE['VEHICLE_MANAGER']
+        self.labelGeoFence = self.createLabel(pos = (Window.width * 0.01, Window.height * 0.9))
+        self.setNumberGeoFence(geoFenceMgr.getNumberGeoFence())
+        self.labelVehicle = self.createLabel(pos = (Window.width * 0.01, Window.height * 0.8))
+        self.setNumberVehicle(vehicleMgr.getNumberVehicle())
         # Khởi tạo button + trên màn hình để thêm hàng rào
         self.buttonAddComon = self.createButton((100, 100), anchorPoint=(0.5, 0.5), position=(100, 80), imgNoramal="btn_add.png", imgPress="btn_add.png", callFunc=self.onUserChoseAdd)
         # Khởi tạo button thêm sau khi user đã vẽ xong hàng rào
@@ -130,6 +149,7 @@ class GUILayer(FloatLayout):
         self.buttonAddVehicle = self.createButton((100, 100), anchorPoint=(0.5, 0.5), position=(100, 380), imgNoramal="btn_add_vehicle.png", imgPress="btn_add_vehicle.png", callFunc=self.onUserAddVehicle)
         self.buttonAddComon.opacity = 1
         return
+
         
         
 

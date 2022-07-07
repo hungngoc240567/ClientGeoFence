@@ -1,12 +1,16 @@
 from tracemalloc import start
 from Vehicle.LoadConfig import *
 from Vehicle.VehicleClass import *
+from GraphicClient.ConfigGraphic import *
 
 class VehicleManager:
     
     def __init__(self):
         self.listVehicle = []
         self.onSendGetAllVehicle()
+
+    def getNumberVehicle(self):
+        return len(self.listVehicle)
 
     def onSendGetAllVehicle(self):
         ret = vehicleController.sendGetListVehicle()
@@ -33,9 +37,10 @@ class VehicleManager:
         for i in range(0, num):
             pos = Point(random.uniform(startPos.lat, endPos.lat), random.uniform(startPos.lon, endPos.lon))
             ret = vehicleController.sendInitVehicle(pos, vx, vy)
-            print("what is ret", ret)
             vehicle = Vehicle(id=ret, pos = pos, listIdGeoFenceIn=[], vx=vx, vy=vy)
             self.listVehicle.append(vehicle)
             vehicle.start()
+        layerGui = GLOBAL_GRAPHIC_VARIABLE['GEO_FENCE_GUI_LAYER']
+        layerGui.setNumberVehicle(len(self.listVehicle))
         
 

@@ -5,7 +5,7 @@
     "max_range_random": 8,
     "min_init_position": 200,
     "max_init_position": 1200,
-    "min_time_random": 0.4,
-    "max_time_random": 0.6,
+    "min_time_random": 0.6,
+    "max_time_random": 1,
     "number_vehicle": 100
 }

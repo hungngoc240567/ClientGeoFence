@@ -26,7 +26,7 @@ class LayerDrawVehicle(FloatLayout):
                 listGeoFenceIn = vehicle.getListIdGeoFenceIn()
                 # Kiểm tra toà độ thực của phương tiện có nằm trong phần toà độ thực của màn hình
                 if coor.getX() > coorOrigin.lat and coor.getX() < coorScreen.lat and coor.getY() > coorOrigin.lon and coor.getY() < coorScreen.lon:
-                    Color(0.1, 1, 1, mode = 'hsv')
+                    Color(0.67, 0.7, 0.5, mode = 'hsv')
                     Rectangle(pos = (point[0], point[1]), size = (10, 10))
                     for j in range(0, len(listGeoFenceIn)):
                         id = listGeoFenceIn[j]
@@ -34,7 +34,7 @@ class LayerDrawVehicle(FloatLayout):
                         color = geoFenceMgr.getGeoFenceColorById(id)
                         if color == None:
                             continue
-                        Color(color, 1, 1, mode = 'hsv')
+                        Color(color, 0.5, 0.5, mode = 'hsv')
                         # Vẽ các hàng màu đó kế bên màu của phương tiện để biểu thị phương tiện ở trong hàng rào
                         Rectangle(pos = (point[0] + (j + 1) * 10, point[1]), size = (10, 10))
 

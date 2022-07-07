@@ -2,6 +2,7 @@ from warnings import catch_warnings
 from GeoFence.GeoFenceClass import GeoFence
 from GeoFence.GeoFenceConfig import *
 from GeoFence.GeoFenceIAPController import *
+from GraphicClient.ConfigGraphic import *
 import random
 
 class GeoFenceManager:
@@ -11,6 +12,9 @@ class GeoFenceManager:
         self.baseColor = 0.05
         self.deltaGroveColor = 0.05
         self.sendGetListGeoFence()
+
+    def getNumberGeoFence(self):
+        return len(self.listGeoFence)
     
     def initListGeoFence(self):
         numberGeoFence = geoFenceConfig.getMaxGeoFence()
@@ -31,7 +35,9 @@ class GeoFenceManager:
             id = msg['idGeoFence']
             listServerPoint = msg['listGeoFencePoint']
             self.listGeoFence[id] = GeoFence(listServerPoint=listServerPoint, id=id)
-            self.listGeoFence[id].setColorHSV(random.uniform(0.85, 1))
+            self.listGeoFence[id].setColorHSV(random.uniform(0.75, 1))
+            layerGui = GLOBAL_GRAPHIC_VARIABLE['GEO_FENCE_GUI_LAYER']
+            layerGui.setNumberGeoFence(len(self.listGeoFence))
 
     def sendGetListGeoFence(self):
         msg = geoFenceController.sendGetAllGeoFence()
@@ -42,8 +48,7 @@ class GeoFenceManager:
                 id = listId[i]
                 listServerPoint = listPointOfGeoFence[i]
                 self.listGeoFence[id] = GeoFence(listServerPoint=listServerPoint, id=id)
-                self.listGeoFence[id].setColorHSV(random.uniform(0.85, 1))
-                print(GeoFence(listServerPoint=listServerPoint, id=id))
+                self.listGeoFence[id].setColorHSV(random.uniform(0.75, 1))
         return
 
     def getGeoFenceById(self, id):
@@ -82,6 +87,8 @@ class GeoFenceManager:
                 id = listId[i]
                 listServerPoint = listPointOfGeoFence[i]
                 self.listGeoFence[id] = GeoFence(listServerPoint=listServerPoint, id=id)
-                self.listGeoFence[id].setColorHSV(random.uniform(0.85, 1))
+                self.listGeoFence[id].setColorHSV(random.uniform(0.75, 1))
                 print(GeoFence(listServerPoint=listServerPoint, id=id))
+            layerGui = GLOBAL_GRAPHIC_VARIABLE['GEO_FENCE_GUI_LAYER']
+            layerGui.setNumberGeoFence(len(self.listGeoFence))
 

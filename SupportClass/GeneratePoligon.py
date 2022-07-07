@@ -16,7 +16,7 @@ class GeneratePolygon:
 
         """
         Start with the center of the polygon at center, then creates the
-        polygon by sampling points on a circle around the center.
+        polygon by sampling points on a circle around ther center.
         Random noise is added by varying the angular spacing between
         sequential points, and by varying the radial distance of each
         point from the centre.
@@ -55,10 +55,10 @@ class GeneratePolygon:
         angle = random.uniform(0, 2 * math.pi)
         for i in range(num_vertices):
             radius = self.clip(random.gauss(avg_radius, spikiness), 0, 2 * avg_radius)
-            point = Point(center.getX() + radius * math.cos(angle),
+            point = Point(center.r() + radius * math.cos(angle),
                     center.getY() + radius * math.sin(angle))
             points.append(point)
-            angle += angle_steps[i]
+            a += angle_steps[i]
 
         return points
                     
@@ -77,7 +77,7 @@ class GeneratePolygon:
         angles = []
         lower = (2 * math.pi / steps) - irregularity
         upper = (2 * math.pi / steps) + irregularity
-        cumsum = 0
+        a = 0
         for i in range(steps):
             angle = random.uniform(lower, upper)
             angles.append(angle)

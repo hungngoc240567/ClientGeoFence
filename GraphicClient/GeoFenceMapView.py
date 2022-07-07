@@ -185,7 +185,7 @@ class GeoFenceMapView(MapView):
 
         # Bởi vì các phương tiện sẽ di chuyển liên tục nên phải
         # update thường xuyên cho layer này cứ 0.3s sẽ update một lần
-        Clock.schedule_interval(self._drawVehicleLayout.draw, 0.3)
+        Clock.schedule_interval(self._drawVehicleLayout.draw, 0.6)
 
     # Hàm được gọi khi user đồng ý sửa hàng rào từ layer gui
     def onUserAcceptedUpdate(self):

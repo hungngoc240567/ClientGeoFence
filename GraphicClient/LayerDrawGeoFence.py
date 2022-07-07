@@ -38,15 +38,15 @@ class LayoutDrawGeoFence(FloatLayout):
                     point = mapView.get_window_xy_from(lat = coor.getX(), lon = coor.getY(), zoom = mapView._zoom)
                     points.append([point[0], point[1]])
                     # Lấy màu của hàng rào để vẽ lên màn hình
-                    Color(geoFence.getColorHSV(), 1, 1, mode = 'hsv')
+                    Color(geoFence.getColorHSV(), 0.5, 0.5, mode = 'hsv')
                     # Nếu hàng rào có diện tích càng lớn thì đường vẽ càng lớn max của đường vẽ là 8px
                     maxWidth = 8
                     deltaArea = area / areaScreen
                     width = maxWidth * deltaArea
-                    if width < 1:
-                        width = 1
+                    if width < 3:
+                        width = 3
                     if width > 8:
-                        width = 8
+                        width = 10
                     # Vẽ hàng rào đã được thoả điều kiện lên màn hình
                     Line(points = points, width = width)
 
